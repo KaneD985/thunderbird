@@ -1,10 +1,10 @@
-module controller(clk, rst, left, right, brk, hzd, dimclk, rlight, display);
+module thunderbird(clk, rst, left, right, brk, hzd, dimclk, rlight, display);
     wire [5:0] pat;
     output [5:0] display;
     input clk, rst, left, right, brk, hzd, dimclk, rlight;
 
-    state state(.clk(clk), .rst(rst), .left(left), .right(right), .brk(brk), .hzd(hzd), .pat(pat));
-    combination (.pat(pat), .dimclk(dimclk), .rlight(rlight), .display(display));
+    state state(.clk(clk), .rst(rst), .left(left), .right(right), .brk(brk), .hazard(hzd), .pat(pat));
+    combination c(.pat(pat), .dimclk(dimclk), .rlight(rlight), .display(display));
 
 endmodule
 
@@ -75,8 +75,8 @@ module combination (pat, dimclk, rlight, display);
 
 endmodule
 
-module state(clk, rst, left, right, brk, hzd, pat);
-    input clk, rst, left, right, brk, hzd;
+module state(clk, rst, left, right, brk, hazard, pat);
+    input clk, rst, left, right, brk, hazard;
     output reg [5:0] pat;
     `define state_off   4'd0
     `define state_brake   4'd1
