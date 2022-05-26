@@ -13,7 +13,7 @@ module combination (pat, dimclk, rlight, display);
     input [5:0] pat;
     input dimclk;
     input rlight;
-    output [5:0] display
+    output reg [5:0] display;
 
     reg dim;
     always@(posedge dimclk) begin
@@ -21,42 +21,42 @@ module combination (pat, dimclk, rlight, display);
         dim <= ~dim;
 
         if(pat[5]) begin
-            display[5] = 1'b1
+            display[5] = 1'b1;
         end
         else begin
             display[5] = dim;
         end
         
         if(pat[4]) begin
-            display[4] = 1'b1
+            display[4] = 1'b1;
         end
         else begin
             display[4] = dim;
         end
 
         if(pat[3]) begin
-            display[3] = 1'b1
+            display[3] = 1'b1;
         end
         else begin
             display[3] = dim;
         end
 
         if(pat[2]) begin
-            display[2] = 1'b1
+            display[2] = 1'b1;
         end
         else begin
             display[2] = dim;
         end
 
         if(pat[1]) begin
-            display[1] = 1'b1
+            display[1] = 1'b1;
         end
         else begin
             display[1] = dim;
         end
 
         if(pat[0]) begin
-            display[0] = 1'b1
+            display[0] = 1'b1;
         end
         else begin
             display[0] = dim;
@@ -71,6 +71,7 @@ module combination (pat, dimclk, rlight, display);
         display[1] = pat[1];
         display[0] = pat[0];
     end
+  end
 
 endmodule
 
@@ -112,7 +113,7 @@ module state(clk, rst, left, right, brk, hzd, pat);
                 pat = 6'b111000;
             end
             `state_r1: begin
-                pat = 6'000100;
+                pat = 6'b000100;
             end
             `state_r2: begin
                 pat = 6'b000110;
